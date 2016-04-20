@@ -1,0 +1,31 @@
+{
+  "name": "speedbacklog",
+  "version": "1.0.0",
+  "description": "scrum backlog",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mBourges/speedbacklog.git"
+  },
+  "author": "Matthieu Bourges",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mBourges/speedbacklog/issues"
+  },
+  "homepage": "https://github.com/mBourges/speedbacklog#readme",
+  "dependencies": {
+    "boom": "^3.1.2",
+    "good": "^6.6.0",
+    "good-console": "^5.3.1",
+    "hapi": "^13.3.0",
+    "immutable": "^3.8.1",
+    "newrelic": "^1.26.2"
+  },
+  "devDependencies": {
+    "dotenv": "^2.0.0"
+  }
+}
