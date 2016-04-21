@@ -104,7 +104,7 @@ server.register([Logger], err => {
             
             db.Project.findById(projectId)
                 .then(project => {
-                    db.Project.build(project).createAssociation(entity)
+                    db.Project.build(project).createUserStory(entity)
                         .then(userStory => {
                             reply(userStory);
                         }).catch(err => {
