@@ -1,29 +1,27 @@
-require('newrelic');
-
-if(process.env.NODE_ENV != 'production') {
+if(process.env.NODE_ENV == 'production') {
+    require('newrelic');
+} else {
     require('dotenv').load();
 }
 
 const Hapi = require('hapi');
 const Immutable = require('immutable');
 const Boom = require('boom');
-const Good = require('good');
-const GoodWinston = require('good-console');
+const Logger = require('./configuration/logger');
+const Database = require('./configuration/database');
+const Sequelize = require('sequelize');
 
-const logger = {
-    register: Good,
-    options: {
-        reporters: [{
-            reporter: GoodWinston,
-            events: {
-                request: '*',
-                response: '*',
-                log: '*',
-                error: '*'
-            }
-        }]
-    }
-};
+const Projects = Database.define('Projects', {
+  Name: {
+    type: Sequelize.STRING,
+  },
+  ClientName: {
+    type: Sequelize.STRING
+  }
+}, {
+  freezeTableName: true
+});
+Projects.sync();
 
 const server = new Hapi.Server();
 
@@ -32,7 +30,7 @@ server.connection({
     port: process.env.PORT 
 });
 
-server.register([logger], err => {
+server.register([Logger], err => {
     if(err) {
         server.error('Error: ', err);
         return ;
@@ -46,6 +44,28 @@ server.register([logger], err => {
         }
     });
     
+    server.route({
+        method: 'POST',
+        path: '/create',
+        config: {
+            payload: {
+                output: 'data',
+                parse: true,
+                allow: 'application/json'
+            }
+        },
+        handler: function(request, reply) {
+            const entity = request.payload;
+            
+            Projects.create(entity)
+                .then(newEntity => {
+                    reply(newEntity);
+                }).catch(err => {
+                    reply(Boom.badRequest(err));
+                });
+        }
+    });
+
     server.start(err => {
         if (err) {
             return server.error('server', err);
@@ -55,3 +75,4 @@ server.register([logger], err => {
     });
     
 });
+

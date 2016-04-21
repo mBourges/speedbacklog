@@ -23,7 +23,10 @@
     "good-console": "^5.3.1",
     "hapi": "^13.3.0",
     "immutable": "^3.8.1",
-    "newrelic": "^1.26.2"
+    "newrelic": "^1.26.2",
+    "pg": "^4.5.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.21.0"
   },
   "devDependencies": {
     "dotenv": "^2.0.0"
