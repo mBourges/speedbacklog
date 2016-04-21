@@ -5,23 +5,10 @@ if(process.env.NODE_ENV == 'production') {
 }
 
 const Hapi = require('hapi');
-const Immutable = require('immutable');
 const Boom = require('boom');
 const Logger = require('./configuration/logger');
-const Database = require('./configuration/database');
-const Sequelize = require('sequelize');
 
-const Projects = Database.define('Projects', {
-  Name: {
-    type: Sequelize.STRING,
-  },
-  ClientName: {
-    type: Sequelize.STRING
-  }
-}, {
-  freezeTableName: true
-});
-Projects.sync();
+const db = require('./models');
 
 const server = new Hapi.Server();
 
@@ -35,6 +22,13 @@ server.register([Logger], err => {
         server.error('Error: ', err);
         return ;
     }
+    
+    db.sequelize.sync()
+        .then(() => {
+            server.log('Database Ready');
+        }).catch(err => {
+            server.error('Database error:', err);
+        });
     
     server.route({
         method: 'GET',
@@ -57,9 +51,22 @@ server.register([Logger], err => {
         handler: function(request, reply) {
             const entity = request.payload;
             
-            Projects.create(entity)
+            db.Project.create(entity)
                 .then(newEntity => {
                     reply(newEntity);
+                }).catch(err => {
+                    reply(Boom.badRequest(err));
+                });
+        }
+    });
+    
+    server.route({
+        method: 'GET',
+        path: '/getAll',
+        handler: function(request, reply) {
+            db.Project.findAll()
+                .then(projects => {
+                    reply(projects);
                 }).catch(err => {
                     reply(Boom.badRequest(err));
                 });
