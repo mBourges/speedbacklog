@@ -8,7 +8,7 @@ const Hapi = require('hapi');
 const Boom = require('boom');
 const Logger = require('./configuration/logger');
 
-const db = require('./models');
+const db = require('./model');
 
 const server = new Hapi.Server();
 
