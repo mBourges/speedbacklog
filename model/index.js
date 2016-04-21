@@ -5,18 +5,13 @@ if (!global.hasOwnProperty('db')) {
     global.db = {
         Sequelize: Sequelize,
         sequelize: sequelize,
-        Project:      sequelize.import(__dirname + '/project'),
-        UserStory:      sequelize.import(__dirname + '/userStory') 
+        Issue:      sequelize.import(__dirname + '/issue'),
+        Comment:      sequelize.import(__dirname + '/comment') 
         // add your other models here
     };
     
     
-    global.db.Project.hasMany(global.db.UserStory);
-
-  /*
-    Associations can be defined here. E.g. like this:
-    global.db.User.hasMany(global.db.SomethingElse)
-  */
+    global.db.Issue.hasMany(global.db.Comment);
 }
 
 module.exports = global.db;

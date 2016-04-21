@@ -40,11 +40,11 @@ server.register([Logger], err => {
     
     server.route({
         method: 'GET',
-        path: '/project',
+        path: '/issue',
         handler: function(request, reply) {
-            db.Project.findAll()
-                .then(projects => {
-                    reply(projects);
+            db.Issue.findAll()
+                .then(issues => {
+                    reply(issues);
                 }).catch(err => {
                     reply(Boom.badRequest(err));
                 });
@@ -53,13 +53,13 @@ server.register([Logger], err => {
     
     server.route({
         method: 'GET',
-        path: '/project/{id}',
+        path: '/issue/{id}',
         handler: function(request, reply) {
-            const projectId = request.params.id;
+            const issueId = request.params.id;
             
-            db.Project.findById(projectId, { include: [ db.UserStory ] })
-                .then(project => {
-                    reply(project);
+            db.Issue.findById(issueId, { include: [ db.Comment ] })
+                .then(issue => {
+                    reply(issue);
                 }).catch(err => {
                     reply(Boom.badRequest(err));
                 });
@@ -68,7 +68,7 @@ server.register([Logger], err => {
     
     server.route({
         method: 'POST',
-        path: '/project',
+        path: '/issue',
         config: {
             payload: {
                 output: 'data',
@@ -79,7 +79,7 @@ server.register([Logger], err => {
         handler: function(request, reply) {
             const entity = request.payload;
             
-            db.Project.create(entity)
+            db.Issue.create(entity)
                 .then(newEntity => {
                     reply(newEntity);
                 }).catch(err => {
@@ -90,7 +90,7 @@ server.register([Logger], err => {
     
     server.route({
         method: 'POST',
-        path: '/project/{id}/userStory',
+        path: '/issue/{id}/comment',
         config: {
             payload: {
                 output: 'data',
@@ -99,14 +99,14 @@ server.register([Logger], err => {
             }
         },
         handler: function(request, reply) {
-            const projectId = request.params.id;
-            const entity = request.payload;
+            const issueId = request.params.id;
+            const comment = request.payload;
             
-            db.Project.findById(projectId)
-                .then(project => {
-                    project.createUserStory(entity)
-                        .then(userStory => {
-                            reply(userStory);
+            db.Issue.findById(issueId)
+                .then(issue => {
+                    issue.createUserStory(comment)
+                        .then(comment => {
+                            reply(comment);
                         }).catch(err => {
                             reply(Boom.badRequest(err));
                         });
