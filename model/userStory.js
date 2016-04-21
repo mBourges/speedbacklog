@@ -1,11 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define("Project", {
+    return sequelize.define("UserStory", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        Name: DataTypes.STRING,
-        ClientName: DataTypes.STRING
+        As: DataTypes.STRING,
+        IwantTo: DataTypes.STRING,
+        SoThat: DataTypes.STRING,
+        Size: DataTypes.STRING
     });
 };

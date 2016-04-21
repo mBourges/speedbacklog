@@ -39,8 +39,36 @@ server.register([Logger], err => {
     });
     
     server.route({
+        method: 'GET',
+        path: '/project',
+        handler: function(request, reply) {
+            db.Project.findAll()
+                .then(projects => {
+                    reply(projects);
+                }).catch(err => {
+                    reply(Boom.badRequest(err));
+                });
+        }
+    });
+    
+    server.route({
+        method: 'GET',
+        path: '/project/{id}',
+        handler: function(request, reply) {
+            const projectId = request.params.id;
+            
+            db.Project.findById(projectId)
+                .then(project => {
+                    reply(project);
+                }).catch(err => {
+                    reply(Boom.badRequest(err));
+                });
+        }
+    });
+    
+    server.route({
         method: 'POST',
-        path: '/create',
+        path: '/project',
         config: {
             payload: {
                 output: 'data',
@@ -61,12 +89,25 @@ server.register([Logger], err => {
     });
     
     server.route({
-        method: 'GET',
-        path: '/getAll',
+        method: 'POST',
+        path: '/project/{id}/userStory',
+        config: {
+            payload: {
+                output: 'data',
+                parse: true,
+                allow: 'application/json'
+            }
+        },
         handler: function(request, reply) {
-            db.Project.findAll()
-                .then(projects => {
-                    reply(projects);
+            const projectId = request.params.id;
+            const entity = request.payload;
+            
+            db.Project.findById(projectId)
+                .then(project => {
+                    project.createAssociation(entity)
+                        .then(userStory => {
+                            reply(userStory);
+                        });
                 }).catch(err => {
                     reply(Boom.badRequest(err));
                 });
