@@ -57,7 +57,7 @@ server.register([Logger], err => {
         handler: function(request, reply) {
             const projectId = request.params.id;
             
-            db.Project.findById(projectId)
+            db.Project.findById(projectId, { include: ['UserStory'] })
                 .then(project => {
                     reply(project);
                 }).catch(err => {
@@ -104,7 +104,7 @@ server.register([Logger], err => {
             
             db.Project.findById(projectId)
                 .then(project => {
-                    db.Project.build(project).createUserStory(entity)
+                    project.createUserStory(entity)
                         .then(userStory => {
                             reply(userStory);
                         }).catch(err => {
