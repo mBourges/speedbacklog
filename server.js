@@ -1,15 +1,16 @@
-if(process.env.NODE_ENV == 'production') {
-    require('newrelic');
-} else {
+require('./configuration/monitoring')(process.env.NODE_ENV);
+
+if(process.env.NODE_ENV == 'development') {
     require('dotenv').load();
 }
 
 const Hapi = require('hapi');
 const Boom = require('boom');
 const Logger = require('./configuration/logger');
+const Inert = require('inert');
+const Path = require('path');
 
 const db = require('./model');
-
 const server = new Hapi.Server();
 
 server.connection({
@@ -17,7 +18,7 @@ server.connection({
     port: process.env.PORT 
 });
 
-server.register([Logger], err => {
+server.register([Logger, Inert], err => {
     if(err) {
         server.error('Error: ', err);
         return ;
@@ -25,10 +26,20 @@ server.register([Logger], err => {
     
     db.sequelize.sync()
         .then(() => {
-            server.log('Database Ready');
+            server.log(['Database'], 'Ready');
         }).catch(err => {
-            server.error('Database error:', err);
+            server.log(['Database', 'error'], err);
         });
+        
+    server.route({
+        method: 'GET',
+        path: '/{param*}',
+        handler: {
+            directory: {
+                path: Path.join(__dirname, 'public')
+            }
+        }
+    });
     
     server.route({
         method: 'GET',

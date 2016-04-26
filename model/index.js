@@ -6,8 +6,7 @@ if (!global.hasOwnProperty('db')) {
         Sequelize: Sequelize,
         sequelize: sequelize,
         Issue:      sequelize.import(__dirname + '/issue'),
-        Comment:      sequelize.import(__dirname + '/comment') 
-        // add your other models here
+        Comment:      sequelize.import(__dirname + '/comment')
     };
     
     
