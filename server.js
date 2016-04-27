@@ -53,7 +53,9 @@ server.register([Logger, Inert], err => {
         method: 'GET',
         path: '/issue',
         handler: function(request, reply) {
-            db.Issue.findAll()
+            db.Issue.findAll({
+                order: 'createdDate DESC'
+            })
                 .then(issues => {
                     reply(issues);
                 }).catch(err => {

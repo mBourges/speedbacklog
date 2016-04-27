@@ -37,7 +37,7 @@ const IssueList = ({ issues, refresh }) => {
                 </div>
             </div>
         </div>
-        <div class="ui bottom attached segment">
+        <div className="ui bottom attached segment">
             <ul className="ui relaxed divided list">
                 { issueList }
             </ul>
