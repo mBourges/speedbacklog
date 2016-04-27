@@ -54,13 +54,14 @@ server.register([Logger, Inert], err => {
         path: '/issue',
         handler: function(request, reply) {
             db.Issue.findAll({
-                order: 'createdDate DESC'
-            })
-                .then(issues => {
-                    reply(issues);
-                }).catch(err => {
-                    reply(Boom.badRequest(err));
-                });
+                order: [
+                    ['createdDate', 'DESC']
+                ]
+            }).then(issues => {
+                reply(issues);
+            }).catch(err => {
+                reply(Boom.badRequest(err));
+            });
         }
     });
     
