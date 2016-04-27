@@ -1,4 +1,5 @@
 import React from 'react';
+import AddIssue from '../addIssue';
 
 const IssueList = ({ issues, refresh, errorMessage }) => {
     const handleClick = (event) => {
@@ -28,9 +29,7 @@ const IssueList = ({ issues, refresh, errorMessage }) => {
             <p>{ errorMessage }</p>
         </div>
         <div className="ui top attached menu">
-            <div className="ui button icon item" onClick={ handleClick }>
-                <i className="repeat icon"></i>
-            </div>
+            <AddIssue />
             <div className="ui item">
                 Issues
             </div>
