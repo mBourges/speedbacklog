@@ -1,6 +1,13 @@
 import React from 'react';
 
-const IssueList = ({ issues }) => {
+const IssueList = ({ issues, refresh }) => {
+    const handleClick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        refresh();
+    };
+    
     const issueList = issues.map((issue, index) => {
         return (<div className="item" key={ index }>
             <div className="right floated content">
@@ -13,16 +20,32 @@ const IssueList = ({ issues }) => {
     });
     
     return (<div>
-        <h2 className="ui header">
-            <i className="plug icon"></i>
-            <div className="content">
+        <div className="ui top attached menu">
+            <div className="ui button icon item" onClick={ handleClick }>
+                <i className="repeat icon"></i>
+            </div>
+            <div className="ui item">
                 Issues
             </div>
-        </h2>
-        <ul className="ui relaxed divided list">
-            { issueList }
-        </ul>
+            <div className="right menu">
+                <div className="ui right aligned category search item">
+                    <div className="ui transparent icon input">
+                        <input className="prompt" type="text" placeholder="Search issue..." />
+                        <i className="search link icon"></i>
+                    </div>
+                    <div className="results"></div>
+                </div>
+            </div>
+        </div>
+        <div class="ui bottom attached segment">
+            <ul className="ui relaxed divided list">
+                { issueList }
+            </ul>
+        </div>
     </div>);
 };
 
 export default IssueList;
+
+
+

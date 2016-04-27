@@ -12,6 +12,7 @@ class IssueList extends React.Component {
         return (<IssueListComponent
             issues={ this.props.issues }
             isFetching={ this.props.isFetching }
+            refresh={ this.props.getIssues }
         />);
     }
 }
