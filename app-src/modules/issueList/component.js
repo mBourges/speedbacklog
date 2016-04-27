@@ -21,22 +21,22 @@ const IssueList = ({ issues, refresh, errorMessage }) => {
     });
     
     return (<div>
-        { errorMessage && <div className="ui negative message">
+         <div className="ui negative message">
             <i className="close icon"></i>
             <div className="header">
                 Sorry, error while fetching issues
             </div>
             <p>{ errorMessage }</p>
-        </div> }
+        </div>
         <div className="ui top attached menu">
-            <AddIssue />
+            <div className="ui button icon item" onClick={ handleClick }>
+                <i className="repeat icon"></i>
+            </div>
             <div className="ui item">
                 Issues
             </div>
             <div className="right menu">
-                <div className="ui button icon item" onClick={ handleClick }>
-                    <i className="plus icon"></i>
-                </div>
+                <AddIssue />
                 <div className="ui right aligned category search item">
                     <div className="ui transparent icon input">
                         <input className="prompt" type="text" placeholder="Search issue..." />
