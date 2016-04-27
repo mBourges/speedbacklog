@@ -16,11 +16,11 @@ const reducer = (state = initialState, action) => {
             newState = newState.set('errorMessage', null);
             break;
         case FETCH_ISSUE_SUCCESS:
-            newState = newState.set('isfetching', false);
+            newState = newState.set('isFetching', false);
             newState = newState.set('issues', action.issues);
             break;
          case FETCH_ISSUE_ERROR:
-            newState = newState.set('isfetching', false);
+            newState = newState.set('isFetching', false);
             newState = newState.set('errorMessage', action.errorMessage);
             break;
     }

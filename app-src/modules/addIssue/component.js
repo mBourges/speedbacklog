@@ -36,7 +36,7 @@ class AddIssue extends React.Component {
   render() {
     return (<div ref={ (n) => this.modal = n } className="ui modal">
         <i className="close icon"></i>
-        <div class="header">
+        <div className="header">
             Create a new issue
             { this.props.isSaving && <i className="notched circle loading icon"></i> }
         </div>
