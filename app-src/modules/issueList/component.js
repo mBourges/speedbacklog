@@ -28,6 +28,9 @@ const IssueList = ({ issues, refresh }) => {
                 Issues
             </div>
             <div className="right menu">
+                <div className="ui button icon item" onClick={ handleClick }>
+                    <i className="plus icon"></i>
+                </div>
                 <div className="ui right aligned category search item">
                     <div className="ui transparent icon input">
                         <input className="prompt" type="text" placeholder="Search issue..." />
