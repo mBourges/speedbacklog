@@ -21,13 +21,13 @@ const IssueList = ({ issues, refresh, errorMessage }) => {
     });
     
     return (<div>
-         <div className="ui negative message">
+        { errorMessage && <div className="ui negative message">
             <i className="close icon"></i>
             <div className="header">
                 Sorry, error while fetching issues
             </div>
             <p>{ errorMessage }</p>
-        </div>
+        </div> }
         <div className="ui top attached menu">
             <AddIssue />
             <div className="ui item">
