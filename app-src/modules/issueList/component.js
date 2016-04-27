@@ -1,7 +1,7 @@
 import React from 'react';
 import AddIssue from '../addIssue';
 
-const IssueList = ({ issues, refresh, errorMessage }) => {
+const IssueList = ({ issues, refresh, errorMessage, isFetching }) => {
     const handleClick = (event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -30,7 +30,8 @@ const IssueList = ({ issues, refresh, errorMessage }) => {
         </div> }
         <div className="ui top attached menu">
             <div className="ui button icon item" onClick={ handleClick }>
-                <i className="repeat icon"></i>
+                { !isFetching && <i className="repeat icon"></i> }
+                { isFetching && <i className="notched circle loading icon"></i> }
             </div>
             <div className="ui item">
                 Issues
