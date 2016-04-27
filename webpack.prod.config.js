@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
-// var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var ROOT_PATH = path.resolve(__dirname);
 
 module.exports = {
@@ -13,6 +13,9 @@ module.exports = {
             test: /\.js?$/,
             exclude: /node_modules/,
             loaders: ['babel']
+        }, {
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
         }, {
             test: /node_modules\/auth0-lock\/.*\.js$/,
             loaders: [
@@ -32,23 +35,20 @@ module.exports = {
     },
     output: {
         path: path.resolve(ROOT_PATH, 'public'),
-        filename: 'bundle.js'
-    }/*,
-    devServer: {
-        contentBase: path.resolve(ROOT_PATH, 'dist'),
-        historyApiFallback: true,
-        hot: true,
-        inline: true,
-        progress: true,
-        host: process.env.IP,
-        port: 8081
-    },*/
-    , plugins: [
-        // new webpack.HotModuleReplacementPlugin(),
-        // new ExtractTextPlugin("style.css"),
+        filename: 'bundle.min.js'
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env':{
+                'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+                'API_URL': JSON.stringify(process.env.API_URL)
+            }
+        }),
+        new ExtractTextPlugin("style.css"),
         new HtmlwebpackPlugin({
             filename: 'index.html',
             title: 'Issues',
+            template: 'template.html'
         })
     ]
 };
