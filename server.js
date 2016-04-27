@@ -91,14 +91,24 @@ server.register([Logger, Inert], err => {
             }
         },
         handler: function(request, reply) {
-            const entity = request.payload;
+            const issue = request.payload.issue;
+            const comment = request.payload.comment;
             
-            db.Issue.create(entity)
-                .then(newEntity => {
-                    reply(newEntity);
-                }).catch(err => {
-                    reply(Boom.badRequest(err));
+            db.sequelize.transaction((t) => {
+                return db.Issue.create(
+                    issue,
+                    { transaction: t }
+                ).then((user) => {
+                    return user.setShooter(
+                        comment,
+                        { transaction: t }
+                    );
                 });
+            }).then((result) => {
+                reply(result);
+            }).catch((err) => {
+                reply(Boom.badRequest(err));
+            });
         }
     });
     

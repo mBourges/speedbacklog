@@ -1,6 +1,6 @@
 import React from 'react';
 
-const IssueList = ({ issues, refresh }) => {
+const IssueList = ({ issues, refresh, errorMessage }) => {
     const handleClick = (event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -20,6 +20,13 @@ const IssueList = ({ issues, refresh }) => {
     });
     
     return (<div>
+         <div className="ui negative message">
+            <i className="close icon"></i>
+            <div className="header">
+                Sorry, error while fetching issues
+            </div>
+            <p>{ errorMessage }</p>
+        </div>
         <div className="ui top attached menu">
             <div className="ui button icon item" onClick={ handleClick }>
                 <i className="repeat icon"></i>

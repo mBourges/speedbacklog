@@ -13,6 +13,7 @@ class IssueList extends React.Component {
             issues={ this.props.issues }
             isFetching={ this.props.isFetching }
             refresh={ this.props.getIssues }
+            errorMessage={ this.props.errorMessage }
         />);
     }
 }
@@ -21,7 +22,8 @@ class IssueList extends React.Component {
 function mapStateToProps(state) {
     return {
         issues: state.issueList.get('issues'),
-        isFetching: state.issueList.get('isFetching')
+        isFetching: state.issueList.get('isFetching'),
+        errorMessage: state.issueList.get('errorMessage')
     };
 }
 

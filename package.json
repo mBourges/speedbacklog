@@ -10,7 +10,7 @@
     "predev": "rm -rf public && mkdir public",
     "dev": "webpack-dev-server",
     "dist": "webpack --config webpack.config.js --progress --colors",
-    "dist:min": "webpack --config webpack.prod.config.js --progress --colors --optimize-minimize --optimize-occurence-order --optimize-dedupe",
+    "dist:min": "webpack --config webpack.prod.config.js --optimize-minimize --optimize-occurence-order --optimize-dedupe",
     "server": "nodemon --watch server.js server.js",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"

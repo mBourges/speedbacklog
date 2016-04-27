@@ -13,6 +13,7 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_ISSUE_REQUEST:
             newState = newState.set('isFetching', true);
+            newState = newState.set('errorMessage', null);
             break;
         case FETCH_ISSUE_SUCCESS:
             newState = newState.set('isfetching', false);
