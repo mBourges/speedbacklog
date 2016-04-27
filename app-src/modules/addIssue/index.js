@@ -4,15 +4,13 @@ import { openAddModal, closeAddModal, addIssues } from './actions';
 import AddIssue from './component';
 
 const AddIssueContainer = ({ show, open, close, onSave, isSaving, errorMessage }) => {
-  return (<div>
-        <div className="ui button icon item" onClick={ open }>
-            <i className="plus icon"></i>
-        </div>
-    { show ? <AddIssue
-        onClose={ close }
-        onSave={ onSave }
-    /> : null}
-  </div>);
+    return (<div className="ui button icon item" onClick={ open }>
+        <i className="plus icon"></i>
+        { show ? <AddIssue
+            onClose={ close }
+            onSave={ onSave }
+        /> : null }
+    </div>);
 };
 
 function mapStateToProps(state) {
