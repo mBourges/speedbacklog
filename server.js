@@ -55,7 +55,7 @@ server.register([Logger, Inert], err => {
         handler: function(request, reply) {
             db.Issue.findAll({
                 order: [
-                    ['createdDate', 'DESC']
+                    ['createdAt', 'DESC']
                 ]
             }).then(issues => {
                 reply(issues);
