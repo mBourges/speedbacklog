@@ -98,8 +98,8 @@ server.register([Logger, Inert], err => {
                 return db.Issue.create(
                     issue,
                     { transaction: t }
-                ).then((user) => {
-                    return user.setShooter(
+                ).then((issue) => {
+                    return issue.createComment(
                         comment,
                         { transaction: t }
                     );
