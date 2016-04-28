@@ -7,14 +7,12 @@ class IssueDetail extends React.Component {
     componentWillMount() {
         if(this.props.issueId) {
             this.props.getIssue(this.props.issueId);
-            console.log('IssueDetail Mounted', this.props);
         }
     }
     
     componentWillReceiveProps(nextProps) {
         if(this.props.issueId !== nextProps.issueId) {
             this.props.getIssue(nextProps.issueId);
-            console.log('IssueDetail PROPS Received', this.props, nextProps);
         }
     }
     

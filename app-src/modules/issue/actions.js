@@ -14,7 +14,7 @@ function fetchDetailRequest() {
 function fetchDetailSuccess(issue) {
     return {
         type: FETCH_DETAIL_SUCCESS,
-        issues: Immutable.fromJS(issue)
+        issue: Immutable.fromJS(issue)
     };
 }
 

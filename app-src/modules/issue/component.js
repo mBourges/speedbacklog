@@ -21,7 +21,7 @@ const IssueDetail = ({ issue, errorMessage, isFetching }) => {
             <p>{ errorMessage }</p>
         </div> }
         <div className="ui top attached menu">
-           
+           { issue.get('Title') }
         </div>
         <div className="ui bottom attached segment">
             <p></p>
