@@ -24,7 +24,7 @@ class IssueDetail extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        issues: state.issue.get('issues'),
+        issue: state.issue.get('issue'),
         isFetching: state.issue.get('isFetching'),
         errorMessage: state.issue.get('errorMessage')
     };

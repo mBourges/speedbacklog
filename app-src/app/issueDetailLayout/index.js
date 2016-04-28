@@ -3,11 +3,11 @@ import IssueDetail from '../../modules/issue';
 
 class IssueDetailLayout extends React.Component {
     componentDidMount() {
-        console.log('IssueDetailLayout MOUNTED', this.props.params.issueId);
+        console.log('IssueDetailLayout MOUNTED', this.props);
     }
     
     componentWillReceiveProps(nextProps) {
-        console.log('IssueDetailLayout RECEIVED PROPS', this.props.params.issueId);
+        console.log('IssueDetailLayout RECEIVED PROPS', this.props, nextProps);
     }
     
     render() {
