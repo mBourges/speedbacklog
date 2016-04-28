@@ -1,6 +1,6 @@
 import React from 'react';
 
-const IssueList = ({ issue, errorMessage, isFetching }) => {
+const IssueDetail = ({ issue, errorMessage, isFetching }) => {
     /*const issueList = issues.map((issue, index) => {
         return (<div className="item" key={ index }>
             <div className="right floated content">
@@ -11,7 +11,7 @@ const IssueList = ({ issue, errorMessage, isFetching }) => {
             </div>
         </div>);
     });*/
-    
+    console.log('Issue', issue)
     return (<div>
          { errorMessage && <div className="ui negative message">
             <i className="close icon"></i>
@@ -21,7 +21,7 @@ const IssueList = ({ issue, errorMessage, isFetching }) => {
             <p>{ errorMessage }</p>
         </div> }
         <div className="ui top attached menu">
-            { issue.get('Title') }
+           
         </div>
         <div className="ui bottom attached segment">
             <p></p>
@@ -29,4 +29,4 @@ const IssueList = ({ issue, errorMessage, isFetching }) => {
     </div>);
 };
 
-export default IssueList;
+export default IssueDetail;
