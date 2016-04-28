@@ -16,6 +16,7 @@ const reducer = (state = initialState, action) => {
             newState = newState.set('errorMessage', null);
             break;
         case FETCH_DETAIL_SUCCESS:
+            console.log('FETCH_DETAIL_SUCCESS', action);
             newState = newState.set('isFetching', false);
             newState = newState.set('issue', action.issue);
             break;
