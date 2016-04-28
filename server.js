@@ -15,7 +15,10 @@ const server = new Hapi.Server();
 
 server.connection({
     host: process.env.IP,
-    port: process.env.PORT 
+    port: process.env.PORT,
+    routes: {
+        cors: true
+    }
 });
 
 server.register([Logger, Inert], err => {
@@ -128,7 +131,7 @@ server.register([Logger, Inert], err => {
             
             db.Issue.findById(issueId)
                 .then(issue => {
-                    issue.createUserStory(comment)
+                    issue.createComment(comment)
                         .then(comment => {
                             reply(comment);
                         }).catch(err => {

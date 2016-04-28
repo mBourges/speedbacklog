@@ -8,7 +8,6 @@ const Header = ({ appName }) => {
                 <img className="logo" src="assets/images/logo.png" />
                 { appName }
             </Link>
-            <a href="#" className="item">Home</a>
         </div>
     </div>);
 };

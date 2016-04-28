@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
+import moment from 'moment';
 import AddIssue from '../addIssue';
+
 
 const IssueList = ({ issues, refresh, errorMessage, isFetching }) => {
     const handleClick = (event) => {
@@ -11,9 +13,19 @@ const IssueList = ({ issues, refresh, errorMessage, isFetching }) => {
     };
     
     const issueList = issues.map((issue, index) => {
+        const formatedCreatedDate = moment(issue.get('createdAt')).format("MMM Do, YYYY");
+        const formatedCreatedTime = moment(issue.get('createdAt')).format("HH:mm:ss");
+        
         return (<div className="item" key={ index }>
             <div className="right floated content">
-                <div className="description">@{ issue.get('createdAt') } By { issue.get('Author') }</div>
+                <div className="description">
+                    { formatedCreatedDate } @{ formatedCreatedTime }
+                </div>
+            </div>
+            <div className="right floated content">
+                <div className="description">
+                    By { issue.get('Author') }
+                </div>
             </div>
             <div className="content">
                 <Link to={ '/issue/' + issue.get('id') } className="header">{ issue.get('Title') }</Link>

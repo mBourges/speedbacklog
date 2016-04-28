@@ -1,17 +1,31 @@
 import React from 'react';
+import AddComment from '../addComment';
 
 const IssueDetail = ({ issue, errorMessage, isFetching }) => {
-    /*const issueList = issues.map((issue, index) => {
-        return (<div className="item" key={ index }>
-            <div className="right floated content">
-                <div className="description">@{ issue.get('createdAt') } By { issue.get('Author') }</div>
+    const comments = issue.get('Comments') ? issue.get('Comments').map((comment, index) => {
+        return (<div className="event" key={ index }>
+            <div className="label">
+                <img src="/images/avatar/small/elliot.jpg" />
             </div>
             <div className="content">
-                <a className="header">{ issue.get('Title') }</a>
+                <div className="summary">
+                    <a>{ comment.get('Author') }</a>
+                    <div className="date">
+                        commented on { comment.get('createdAt') }
+                    </div>
+                </div>
+                <div className="extra text">
+                    <pre>{ comment.get('Description') }</pre>
+                </div>
+                <div>
+                    <div className="meta">
+                        
+                    </div>
+                </div>
             </div>
         </div>);
-    });*/
-    console.log('Issue', issue)
+    }) : null;
+    
     return (<div>
          { errorMessage && <div className="ui negative message">
             <i className="close icon"></i>
@@ -20,12 +34,22 @@ const IssueDetail = ({ issue, errorMessage, isFetching }) => {
             </div>
             <p>{ errorMessage }</p>
         </div> }
-        <h5 className="ui top attached header">
+        { isFetching && <div className="ui segment min-height">
+            <div className="ui active dimmer">
+                <div className="ui text loader">Loading</div>
+            </div>
+        </div> }
+        { !isFetching && <h3 className="ui top attached header">
            { issue.get('Title') }
-        </h5>
-        <div className="ui attached segment">
-            <p></p>
-        </div>
+        </h3> }
+        { !isFetching && <div className="ui attached segment">
+            <div className="ui feed">
+                { comments }
+            </div>
+        </div> }
+        { !isFetching && <div className="ui bottom attached segment">
+            <AddComment issueId={ issue.get('id') } />
+        </div> }
     </div>);
 };
 

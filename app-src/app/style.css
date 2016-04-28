@@ -3,5 +3,22 @@ html, body, #app, .app-container {
 }
 
 .main.container {
-    margin-top: 3em;
+    height: 100%;
+    padding-top: 4em;
+}
+
+.segment.min-height {
+    min-height: 10em;
+}
+
+.extra.text > pre {
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    min-width: 320px;
+    background: #ffffff;
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.4285em;
+    color: rgba(0, 0, 0, 0.87);
 }

@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import { FETCH_DETAIL_REQUEST, FETCH_DETAIL_SUCCESS, FETCH_DETAIL_ERROR, CLEAR_DETAIL } from './actions';
+import { ADD_COMMENT_SUCCESS } from '../addComment/actions';
 
 const initialState = Immutable.Map({
     isFetching: false,
@@ -25,6 +26,11 @@ const reducer = (state = initialState, action) => {
             break;
         case CLEAR_DETAIL:
             newState = initialState;
+            break;
+        case ADD_COMMENT_SUCCESS:
+            const comments = newState.getIn(['issue', 'Comments']).push(action.comment);
+            newState = newState.setIn(['issue', 'Comments'], comments);
+            break;
     }
     
     return newState;
