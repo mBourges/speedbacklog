@@ -3,7 +3,7 @@ import { FETCH_DETAIL_REQUEST, FETCH_DETAIL_SUCCESS, FETCH_DETAIL_ERROR } from '
 
 const initialState = Immutable.Map({
     isFetching: false,
-    issue: Immutable.Map(),
+    issue: Immutable.Map({}),
     errorMessage: null
 });
 
