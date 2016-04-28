@@ -4,6 +4,7 @@ import { getIssue } from './api';
 export const FETCH_DETAIL_REQUEST = 'FETCH_DETAIL_REQUEST';
 export const FETCH_DETAIL_SUCCESS = 'FETCH_DETAIL_SUCCESS';
 export const FETCH_DETAIL_ERROR = 'FETCH_DETAIL_ERROR';
+export const CLEAR_DETAIL = 'CLEAR_DETAIL';
 
 function fetchDetailRequest() {
     return {
@@ -32,8 +33,13 @@ export function fetchIssue(id) {
         getIssue(id).then((response) => {
             dispatch(fetchDetailSuccess(response.data));
         }).catch(response => {
-            console.log('response', response)
             dispatch(fetchDetailError(response.data.error.message));
         });
+    };
+}
+
+export function clearDetail() {
+    return {
+        type: CLEAR_DETAIL
     };
 }

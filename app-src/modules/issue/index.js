@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import IssueComponent from './component';
-import { fetchIssue } from './actions';
+import { fetchIssue, clearDetail } from './actions';
 
 class IssueDetail extends React.Component {
     componentWillMount() {
@@ -14,6 +14,10 @@ class IssueDetail extends React.Component {
         if(this.props.issueId !== nextProps.issueId) {
             this.props.getIssue(nextProps.issueId);
         }
+    }
+    
+    componentWillUnmount() {
+        this.props.clear();
     }
     
     render() {
@@ -38,6 +42,9 @@ function mapDispatchToProps(dispatch) {
     return {
         getIssue: (id) => {
             dispatch(fetchIssue(id));
+        },
+        clear: () => {
+            dispatch(clearDetail());
         }
     };
 }

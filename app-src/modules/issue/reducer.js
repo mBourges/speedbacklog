@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import { FETCH_DETAIL_REQUEST, FETCH_DETAIL_SUCCESS, FETCH_DETAIL_ERROR } from './actions';
+import { FETCH_DETAIL_REQUEST, FETCH_DETAIL_SUCCESS, FETCH_DETAIL_ERROR, CLEAR_DETAIL } from './actions';
 
 const initialState = Immutable.Map({
     isFetching: false,
@@ -23,6 +23,8 @@ const reducer = (state = initialState, action) => {
             newState = newState.set('isFetching', false);
             newState = newState.set('errorMessage', action.errorMessage);
             break;
+        case CLEAR_DETAIL:
+            newState = initialState;
     }
     
     return newState;

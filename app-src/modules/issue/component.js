@@ -20,10 +20,10 @@ const IssueDetail = ({ issue, errorMessage, isFetching }) => {
             </div>
             <p>{ errorMessage }</p>
         </div> }
-        <div className="ui top attached menu">
+        <h5 className="ui top attached header">
            { issue.get('Title') }
-        </div>
-        <div className="ui bottom attached segment">
+        </h5>
+        <div className="ui attached segment">
             <p></p>
         </div>
     </div>);
