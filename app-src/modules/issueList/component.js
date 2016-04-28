@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import AddIssue from '../addIssue';
 
 const IssueList = ({ issues, refresh, errorMessage, isFetching }) => {
@@ -15,7 +16,7 @@ const IssueList = ({ issues, refresh, errorMessage, isFetching }) => {
                 <div className="description">@{ issue.get('createdAt') } By { issue.get('Author') }</div>
             </div>
             <div className="content">
-                <a className="header">{ issue.get('Title') }</a>
+                <Link to={ '/issue/' + issue.get('id') } className="header">{ issue.get('Title') }</Link>
             </div>
         </div>);
     });
