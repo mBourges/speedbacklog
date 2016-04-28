@@ -5,11 +5,17 @@ import { fetchIssue } from './actions';
 
 class IssueDetail extends React.Component {
     componentWillMount() {
-        console.log('IssueDetail Mounted', this.props);
+        if(this.props.issueId) {
+            this.props.getIssue(this.props.issueId);
+            console.log('IssueDetail Mounted', this.props);
+        }
     }
     
     componentWillReceiveProps(nextProps) {
-        console.log('IssueDetail PROPS Received', this.props, nextProps);
+        if(this.props.issueId !== nextProps.issueId) {
+            this.props.getIssue(nextProps.issueId);
+            console.log('IssueDetail PROPS Received', this.props, nextProps);
+        }
     }
     
     render() {
