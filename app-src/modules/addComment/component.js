@@ -7,18 +7,15 @@ class AddComment extends React.Component {
         event.stopPropagation();
         
         this.props.onSubmit(this.getComment());
+        this.resetForm();
     }
     
     
     getComment() {
-        const comment =  {
+        return {
             Description: ReactDOM.findDOMNode(this.refs.Description).value,
             Author: ReactDOM.findDOMNode(this.refs.Author).value
         };
-        
-        this.resetForm();
-        
-        return comment;
     }
     
     clear(event) {
@@ -35,7 +32,7 @@ class AddComment extends React.Component {
     
   render() {
     return (<form className="ui form" onSubmit={ this.handleSubmit.bind(this) }>
-         { this.props.isSaving && <div className="ui active dimmer">
+        { this.props.isSaving && <div className="ui active dimmer">
             <div className="ui text loader">Loading</div>
         </div> }
         <div className="field">

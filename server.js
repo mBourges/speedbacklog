@@ -83,6 +83,24 @@ server.register([Logger, Inert], err => {
         }
     });
     
+    var jackrabbit = require('jackrabbit');
+    server.route({
+        method: 'GET',
+        path: '/rabbit',
+        handler: function(request, reply) {
+            var rabbit = jackrabbit(process.env.CLOUDAMQP_URL);
+            var exchange = rabbit.default();
+            var hello = exchange.queue({ name: 'hello' });
+            
+            exchange.publish('Hello World!', { key: 'hello' });
+            exchange.on('drain', (data) => {
+                rabbit.close();
+                server.log(['Queue'], data);
+                reply('Queued');
+            });
+        }
+    });
+    
     server.route({
         method: 'POST',
         path: '/issue',
